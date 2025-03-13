@@ -16,7 +16,7 @@ public class ItemController {
         //      model.addAttribute("전달할데이터이름","데이터");
         return "list.html";
         //html에 서버데이터 넣어서 보내주려면 템플렌엔진 설치  (여기선 타임리프 사용)
-        //파라미터 Model model 추가
+        //서버 함수의 파라미터에  Model model 추가
         //model.addAttribute("전달할데이터이름","데이터값");
         //html에 가서 넣고싶은곳에 th:text="${name}" 적기
     }
