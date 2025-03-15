@@ -23,17 +23,20 @@ public class ItemController {
     //public  없으면 같은 패키지 안에서만 사용가능
     @GetMapping("/list")
     String list(Model model){
-       List<Item> result = itemRepository.findAll();
+      List<Item> result = itemRepository.findAll();
        //List<출력중인 테이블 클래스 넣어야함 >
-        System.out.println(result.get(0).price);
+//        System.out.println(result.get(0).price);
+//        ArrayList<Integer> a = new ArrayList<>();
+//        a.add(30);
+//        a.add(40);
+//        System.out.println(a.get(0));
+//        System.out.println(a.get(1));
+//
+//        var aa = new Item();
+//        aa.setTitle("dsda");
+//        System.out.println(aa.toString());
 
-        ArrayList<Integer> a = new ArrayList<>();
-        a.add(30);
-        a.add(40);
-        System.out.println(a.get(0));
-        System.out.println(a.get(1));
-
-        model.addAttribute("name","비싼 바지");
+        model.addAttribute("items",result);
         //      model.addAttribute("전달할데이터이름","데이터");
         return "list.html";
         //html에 서버데이터 넣어서 보내주려면 템플렌엔진 설치  (여기선 타임리프 사용)
