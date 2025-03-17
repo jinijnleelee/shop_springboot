@@ -7,10 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @RequiredArgsConstructor
@@ -35,6 +39,16 @@ public class ItemController {
 //        var aa = new Item();
 //        aa.setTitle("dsda");
 //        System.out.println(aa.toString());
+//-------------------------------숙제
+//     Age object = new Age();
+//      object.setAge(31);
+//      object.setName("jin");
+    //  object.OnePlusAge();
+      //object.SettingAge(12);
+
+//        System.out.println(object.OnePlusAge());
+//        System.out.println(object.SettingAge(12));
+
 
         model.addAttribute("items",result);
         //      model.addAttribute("전달할데이터이름","데이터");
@@ -43,6 +57,40 @@ public class ItemController {
         //서버 함수의 파라미터에  Model model 추가
         //model.addAttribute("전달할데이터이름","데이터값");
         //html에 가서 넣고싶은곳에 th:text="${name}" 적기
+        }
+
+    @GetMapping("/write")
+    String write(){
+       // List<Item> result = itemRepository.findAll();
+
+     //   model.addAttribute("items",result);
+
+        return "write.html";
+        //html에 서버데이터 넣어서 보내주려면 템플렌엔진 설치  (여기선 타임리프 사용)
+        //서버 함수의 파라미터에  Model model 추가
+        //model.addAttribute("전달할데이터이름","데이터값");
+        //html에 가서 넣고싶은곳에 th:text="${name}" 적기
     }
 
+
+    @PostMapping("/add")
+//    String addPost(@RequestParam Map formData){
+    String addPost(@RequestParam String title,
+                   @RequestParam int price){
+        //@RequestParam(name ="title")
+        System.out.println(title);
+        System.out.println(price);
+        //행복사 컨트롤 + d
+
+//        Map<String,Object > test = new HashMap<>();
+//        test.put("name","이");
+//        test.put("age",20);
+//
+//        System.out.println(formData);
+//        System.out.println(test.get("name"));
+
+        //특정페이지로 돌아가게 만드는법 = redirect:/주소
+        return "redirect:/list";
+
+    }
 }

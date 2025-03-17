@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href=" /main.css" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <table class="table" th:each="i :${Notice}">
+            <tr><td colspan="2"><h2>게시판</h2></td></tr>
+            <tr class="header">
+                <td class="num" th:text="${i.}">번호</td>
+                <td class="title" th:text="${i.}">제목</td>
+                <td th:text="${i.}">작성날짜</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
