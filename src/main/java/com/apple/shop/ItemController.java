@@ -6,15 +6,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.*;
 
 
 @RequiredArgsConstructor
@@ -72,14 +67,44 @@ public class ItemController {
         //html에 가서 넣고싶은곳에 th:text="${name}" 적기
     }
 
+    //public  없으면 같은 패키지 안에서만 사용가능
+    @GetMapping("/detail/{작명}")
+    String detail(){
 
+
+//        System.out.println(reslut.get());
+//
+//        if (reslut.isPresent()){
+//            System.out.println(reslut.get());
+//        }
+
+        return "detail.html";
+
+    }
     @PostMapping("/add")
 //    String addPost(@RequestParam Map formData){
-    String addPost(@RequestParam String title,
-                   @RequestParam int price){
-        //@RequestParam(name ="title")
+    String addPost(
+//            @ModelAttribute Item item){ ModelAttribute로 통째로 담아주고 가져오는 방법도 있음
+    @RequestParam(name ="title") String title,
+                   @RequestParam(name ="price") int price){
+
+
         System.out.println(title);
         System.out.println(price);
+//        Item item = new Item;
+//        item.setTitle(title);
+//        item.setPrice(price);
+//        itemRepository.save(item);
+       Item addItem = new Item(title,price);
+
+        itemRepository.save(addItem);
+     //   itemRepository.save(item);
+
+
+
+        //        Map<String,Object > test = new HashMap<>();
+//        test.put("name","이");
+//        test.put("age",20);
         //행복사 컨트롤 + d
 
 //        Map<String,Object > test = new HashMap<>();
@@ -91,6 +116,6 @@ public class ItemController {
 
         //특정페이지로 돌아가게 만드는법 = redirect:/주소
         return "redirect:/list";
-
+//product
     }
 }
