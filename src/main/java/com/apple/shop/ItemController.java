@@ -68,17 +68,26 @@ public class ItemController {
     }
 
     //public  없으면 같은 패키지 안에서만 사용가능
-    @GetMapping("/detail/{작명}")
-    String detail(){
+    @GetMapping("/detail/{id}")
+    String detail(@PathVariable("id") Long id,
+                  Model model){
+        Optional<Item>  reslut = itemRepository.findById(id);
 
+        if (reslut.isPresent()) {
+            System.out.println(reslut.get());
 
+            model.addAttribute("data",reslut.get());
+            return "detail.html";
+        }else {
+            return  "redirect:/list";
+        }
 //        System.out.println(reslut.get());
 //
 //        if (reslut.isPresent()){
 //            System.out.println(reslut.get());
 //        }
 
-        return "detail.html";
+
 
     }
     @PostMapping("/add")
