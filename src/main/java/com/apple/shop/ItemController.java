@@ -3,12 +3,12 @@ package com.apple.shop;
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Method;
 import java.util.*;
 
 
@@ -69,18 +69,24 @@ public class ItemController {
 
     //public  없으면 같은 패키지 안에서만 사용가능
     @GetMapping("/detail/{id}")
-    String detail(@PathVariable("id") Long id,
-                  Model model){
-        Optional<Item>  reslut = itemRepository.findById(id);
+   String detail(@PathVariable("id") Long id,
+                  Model model) throws Exception {
 
-        if (reslut.isPresent()) {
-            System.out.println(reslut.get());
+        throw new Exception();
 
-            model.addAttribute("data",reslut.get());
-            return "detail.html";
-        }else {
-            return  "redirect:/list";
-        }
+
+
+//            Optional<Item>  reslut = itemRepository.findById(id);
+//            if (reslut.isPresent()) {
+//                System.out.println(reslut.get());
+//                model.addAttribute("data",reslut.get());
+//                return "detail.html";
+//            }else {
+//                return  "redirect:/list";
+//            }
+
+
+
 //        System.out.println(reslut.get());
 //
 //        if (reslut.isPresent()){
@@ -127,4 +133,7 @@ public class ItemController {
         return "redirect:/list";
 //product
     }
+
+
+
 }

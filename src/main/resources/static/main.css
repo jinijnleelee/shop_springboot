@@ -76,3 +76,11 @@ table {
   display : block;
   margin : auto;
 }
+
+
+/*에러페이지 */
+.my-div {
+  border : 1px solid blue;
+  text-align : center;
+  padding : 100px 0;
+}
