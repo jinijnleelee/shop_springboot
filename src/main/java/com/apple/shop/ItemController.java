@@ -17,6 +17,7 @@ import java.util.*;
 public class ItemController {
 
    private final ItemRepository itemRepository;
+   private final ItemService itemService;
 
 
     //public  없으면 같은 패키지 안에서만 사용가능
@@ -70,20 +71,24 @@ public class ItemController {
     //public  없으면 같은 패키지 안에서만 사용가능
     @GetMapping("/detail/{id}")
    String detail(@PathVariable("id") Long id,
-                  Model model) throws Exception {
-
-        throw new Exception();
+                  Model model)  {
 
 
 
-//            Optional<Item>  reslut = itemRepository.findById(id);
-//            if (reslut.isPresent()) {
-//                System.out.println(reslut.get());
-//                model.addAttribute("data",reslut.get());
-//                return "detail.html";
-//            }else {
-//                return  "redirect:/list";
-//            }
+        try{
+            Optional<Item>  reslut = itemRepository.findById(id);
+            if (reslut.isPresent()) {
+                System.out.println(reslut.get());
+                model.addAttribute("data",reslut.get());
+                return "detail.html";
+            }else {
+                return  "redirect:/list";
+            }
+        } catch (Exception e) {
+                return  "redirect:/list";
+        }
+
+
 
 
 
@@ -104,16 +109,7 @@ public class ItemController {
                    @RequestParam(name ="price") int price){
 
 
-        System.out.println(title);
-        System.out.println(price);
-//        Item item = new Item;
-//        item.setTitle(title);
-//        item.setPrice(price);
-//        itemRepository.save(item);
-       Item addItem = new Item(title,price);
-
-        itemRepository.save(addItem);
-     //   itemRepository.save(item);
+    itemService.saveItem(title,price);
 
 
 
