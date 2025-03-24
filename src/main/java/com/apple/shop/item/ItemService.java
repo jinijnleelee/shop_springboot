@@ -1,4 +1,4 @@
-package com.apple.shop;
+package com.apple.shop.item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,5 +25,33 @@ public class ItemService {
         Item addItem = new Item(title,price);
 
         itemRepository.save(addItem);
+    }
+
+
+    public void editForm(Long id,String title,Integer price){
+
+
+
+        System.out.println(id);
+        System.out.println(title);
+        System.out.println(price);
+
+        Item editForm = new Item(id,title,price);
+
+        itemRepository.save(editForm);
+    }
+
+
+    public void itemDelete(Long id,String title,Integer price){
+
+
+
+        System.out.println(id);
+        System.out.println(title);
+        System.out.println(price);
+
+        Item item = new Item(id,title,price);
+
+        itemRepository.delete(item);
     }
 }

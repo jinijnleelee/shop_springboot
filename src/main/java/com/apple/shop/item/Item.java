@@ -1,4 +1,4 @@
-package com.apple.shop;
+package com.apple.shop.item;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,6 +27,13 @@ public class Item {
         this.price = price;
     }
 
+
+    public Item(Long id, String title,Integer price){
+
+        this.id = id;
+        this.title = title;
+        this.price = price;
+    }
 
     //@Entity 변수들에 public을 붙이면 다른 모든 클래스에서 문제없이 사용가능. 그치만 private로 쓰는경우도 있음. 근데 private는 getter setter가 있어야함
 

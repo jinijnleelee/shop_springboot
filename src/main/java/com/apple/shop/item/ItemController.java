@@ -1,10 +1,8 @@
-package com.apple.shop;
+package com.apple.shop.item;
 //클래스를 다른 파일에서 쓰고싶으면 위에 있는 이 파일 경로를 적어놔야 함
 
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -73,8 +71,6 @@ public class ItemController {
    String detail(@PathVariable("id") Long id,
                   Model model)  {
 
-
-
         try{
             Optional<Item>  reslut = itemRepository.findById(id);
             if (reslut.isPresent()) {
@@ -129,7 +125,129 @@ public class ItemController {
         return "redirect:/list";
 //product
     }
+    @PostMapping("/editForm")
+//    String addPost(@RequestParam Map formData){
+    String editForm(
+            @RequestParam(name ="title") String title,
+            @RequestParam(name ="price") int price,
+    Long id){
+
+
+        itemService.editForm(id,title,price);
 
 
 
-}
+        //        Map<String,Object > test = new HashMap<>();
+//        test.put("name","이");
+//        test.put("age",20);
+        //행복사 컨트롤 + d
+
+//        Map<String,Object > test = new HashMap<>();
+//        test.put("name","이");
+//        test.put("age",20);
+//
+//        System.out.println(formData);
+//        System.out.println(test.get("name"));
+
+        //특정페이지로 돌아가게 만드는법 = redirect:/주소
+        return "redirect:/list";
+//product
+    }
+
+//    @GetMapping("/edit")
+//    String editItems(@RequestParam(name ="editId",defaultValue="") Long editId,
+//                     Model model){
+//        //
+//       System.out.println(editId);
+//
+//
+//            try{
+//                Optional<Item>  reslut = itemRepository.findById(editId);
+//                if (reslut.isPresent()) {
+//                    System.out.println(reslut.get());
+//                    model.addAttribute("data",reslut.get());
+//                    return "edit.html";
+//                }else {
+//                    return "edit.html";
+//                }
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//
+//            }
+//        return "edit.html";
+//
+//    }
+
+
+    @GetMapping("/edit/{id}")
+    String editItems(@PathVariable("id") Long id,
+                     Model model)  {
+        try{
+            Optional<Item>  reslut = itemRepository.findById(id);
+            if (reslut.isPresent()) {
+                System.out.println(reslut.get());
+                model.addAttribute("data",reslut.get());
+
+
+                return "edit.html";
+            }else {
+                return  "redirect:/list";
+            }
+        } catch (Exception e) {
+            return  "redirect:/list";
+        }
+
+    }
+    @PostMapping("/test1")
+    String test1(@RequestBody Map<String, Object> name){
+        // List<Item> result = itemRepository.findAll();
+
+        //   model.addAttribute("items",result);
+        System.out.println(name);
+        System.out.println(name.get("name"));
+        return  "redirect:/list";
+        //html에 서버데이터 넣어서 보내주려면 템플렌엔진 설치  (여기선 타임리프 사용)
+        //서버 함수의 파라미터에  Model model 추가
+        //model.addAttribute("전달할데이터이름","데이터값");
+        //html에 가서 넣고싶은곳에 th:text="${name}" 적기
+    }
+    @GetMapping("/test2")
+    String test2(@RequestParam String name,int age){
+        // List<Item> result = itemRepository.findAll();
+
+        //   model.addAttribute("items",result);
+        System.out.println(name);
+        System.out.println(age);
+        return  "redirect:/list";
+        //html에 서버데이터 넣어서 보내주려면 템플렌엔진 설치  (여기선 타임리프 사용)
+        //서버 함수의 파라미터에  Model model 추가
+        //model.addAttribute("전달할데이터이름","데이터값");
+        //html에 가서 넣고싶은곳에 th:text="${name}" 적기
+    }
+
+//    @PostMapping("/itemDelete")
+//    String itemDelete(){
+//        Optional<Item> result = itemRepository.findById(6L);
+//
+//        if(result.isPresent()){
+//
+//            Long id = result.get().getId();
+//            String title = result.get().getTitle();
+//            int price = result.get().getPrice();
+//
+//            itemService.itemDelete(id,title,price);
+//            System.out.println("응 맞아~");
+//            return  "redirect:/list";
+//        }
+//        return  "redirect:/list";
+//        //   model.addAttribute("items",result);
+//
+//
+//
+//
+//    }
+    }
+
+
+
+
