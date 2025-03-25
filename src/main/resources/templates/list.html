@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link href=" /main.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body>
 
@@ -20,12 +21,19 @@
       <!-- items.get(0)의 줄임 = items[0]-->
      <h4 th:text="${i.title}" >바지</h4></a>
         <p th:text="${i.price + '원'}" >7억</p>
-      <a href="edit/1">수정</a>
+      <a href="/edit/7">수정</a>
+      <span th:onclick="fetch('/itemDelete?id=[[${i.id}]]', { method : 'DELETE' } )
+        .then(r => r.text())
+        .then((a) => {
+        console.log(a);
+        location.reload();
+        })
+        ">🗑️</span>
 
     </div>
 </div>
 <button class="btn">버튼</button>
-
+<button class="btn">버튼</button>
 <!--
 <div class = "card">
     <img src="https://placehold.co/300">
