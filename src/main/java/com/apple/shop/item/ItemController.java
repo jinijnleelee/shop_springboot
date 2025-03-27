@@ -2,6 +2,7 @@ package com.apple.shop.item;
 //클래스를 다른 파일에서 쓰고싶으면 위에 있는 이 파일 경로를 적어놔야 함
 
 
+import com.apple.shop.SecurityConfig;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,7 +18,9 @@ import java.util.*;
 public class ItemController {
 
     private final ItemRepository itemRepository;
+    private final MemberRepository memberRepository;
     private final ItemService itemService;
+    private final SecurityConfig securityConfig;
 
 
     //public  없으면 같은 패키지 안에서만 사용가능
@@ -250,10 +253,67 @@ public class ItemController {
 
     @GetMapping("/test3")
     String test3() {
-      var result = new BCryptPasswordEncoder().encode("ㅜ");
+        var result = new BCryptPasswordEncoder().encode("ㅜ");
         System.out.println(result);
         return "redirect:/list";
     }
+
+    @PostMapping("/bcrytest")
+    String bcrytest() {
+
+        String result2 = new BCryptPasswordEncoder().encode("ㅇ");
+
+        return "signUpPage.html";
+    }
+
+    @GetMapping("/signUpPage")
+    String signUpPage() {
+
+
+        return "signUpPage.html";
+    }
+
+    @GetMapping("/signInPage")
+    String signInPage() {
+
+
+        return "signInPage.html";
+    }
+
+
+    @PostMapping("/signUp")
+    String signUp(String username, String displayName, String password) {
+        try {
+            String bcPassward = new BCryptPasswordEncoder().encode(password);
+            Member member = new Member(username, bcPassward, displayName);
+            memberRepository.save(member);
+
+
+            return "redirect:/list";
+        } catch (Exception e) {
+            e.getMessage();
+
+        }
+        return "redirect:/signUpPage";
+
+
+    }
+
+
+    @PostMapping("/signIn")
+    String signIn() {
+
+
+        return "redirect:/signUpPage";
+
+
+
+
+
+    }
+
+
+
 
 }
 

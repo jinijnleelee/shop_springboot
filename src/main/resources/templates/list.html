@@ -12,7 +12,7 @@
 <body>
 
 <div th:replace="~{nav.html::navbar}"></div>
-
+<a href="/signUpPage"><button class="signUpBtn">회원가입</button></a><a href="/signInPage"><button class="signInBtn">로그인</button></a>
 <div class = "card" th:each="i :${items}">
     <!--  타임리프 반복문 th:each="작명 :${서버에서 보낸 변수명} 하면 th가 붙은곳을 item갯수만큼 복붙해줌 -->
     <img src="https://placehold.co/300">
@@ -33,7 +33,7 @@
     </div>
 </div>
 <button class="btn">버튼</button>
-<button class="btn">버튼</button>
+
 <!--
 <div class = "card">
     <img src="https://placehold.co/300">
